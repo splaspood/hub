@@ -22,6 +22,7 @@ mkShell {
     go
     gotools
     jq
+    nodePackages.prettier
     shfmt
     shellcheck
     libseccomp
