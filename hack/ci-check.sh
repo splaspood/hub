@@ -4,7 +4,9 @@
 
 set -eux
 
-env
+git fetch --depth=1 origin "$GITHUB_BASE_REF:$GITHUB_BASE_REF"
+git fetch --depth=1 origin "$GITHUB_HEAD_REF:$GITHUB_HEAD_REF"
+git diff "origin/$GITHUB_HEAD_REF..origin/$GITHUB_BASE_REF"
 
 failed=0
 
@@ -26,3 +28,5 @@ test -z "$(git status --porcelain go.mod go.sum)"
 go vet ./...
 
 go test -v ./...
+
+go run cmd/hub/main.go build --dry-run --git-ref ""
